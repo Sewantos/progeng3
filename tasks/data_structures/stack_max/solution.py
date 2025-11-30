@@ -1,5 +1,4 @@
 class StackMax:
-
     def __init__(self) -> None:
         self.stack: list[int] = []
         self.max_stack: list[int] = []

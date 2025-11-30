@@ -60,8 +60,9 @@ def test_five_nodes_full_check() -> None:
     assert new_head.prev is None
 
     expected_order = ["E", "D", "C", "B", "A"]
-    cur = new_head
+    cur: DoubleConnectedNode | None = new_head
     for val in expected_order:
+        assert cur is not None
         assert cur.value == val
         if cur.next:
             assert cur.next.prev is cur
@@ -112,8 +113,9 @@ def test_large_list() -> None:
     assert new_head.value == n - 1
     assert new_head.prev is None
 
-    cur = new_head
+    cur: DoubleConnectedNode | None = new_head
     for i in range(n - 1, -1, -1):
+        assert cur is not None
         assert cur.value == i
         cur = cur.next
 

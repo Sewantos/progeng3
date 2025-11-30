@@ -3,38 +3,38 @@ from tasks.data_structures.bracket_sequence.solution import (
 )
 
 
-def test_empty_strings():
+def test_empty_strings() -> None:
     assert is_correct_bracket_seq("") is True
 
 
-def test_simple_correct():
+def test_simple_correct() -> None:
     assert is_correct_bracket_seq("()") is True
     assert is_correct_bracket_seq("[]") is True
     assert is_correct_bracket_seq("{}") is True
 
 
-def test_simple_wrong():
+def test_simple_wrong() -> None:
     assert is_correct_bracket_seq("(]") is False
     assert is_correct_bracket_seq("}]") is False
     assert is_correct_bracket_seq("([") is False
 
 
-def test_nested_correct():
+def test_nested_correct() -> None:
     assert is_correct_bracket_seq("{[()]}") is True
     assert is_correct_bracket_seq("({[]})") is True
     assert is_correct_bracket_seq("[{()()}]") is True
 
 
-def test_unclosed():
+def test_unclosed() -> None:
     assert is_correct_bracket_seq("(") is False
     assert is_correct_bracket_seq("{[()") is False
     assert is_correct_bracket_seq("[]]") is False
 
 
-def test_complex_correct():
+def test_complex_correct() -> None:
     assert is_correct_bracket_seq("(([]){})[]") is True
 
 
-def test_complex_wrong():
+def test_complex_wrong() -> None:
     assert is_correct_bracket_seq("(([]){}[]") is False
     assert is_correct_bracket_seq("(([]){})[]]") is False

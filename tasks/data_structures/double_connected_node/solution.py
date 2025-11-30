@@ -1,24 +1,32 @@
 class DoubleConnectedNode:
-    def __init__(self, value, next=None, prev=None):
+    value: object
+    next: "DoubleConnectedNode | None"
+    prev: "DoubleConnectedNode | None"
+
+    def __init__(
+        self,
+        value: object,
+        next: "DoubleConnectedNode | None" = None,
+        prev: "DoubleConnectedNode | None" = None,
+    ) -> None:
         self.value = value
         self.next = next
         self.prev = prev
 
 
-def solution(node: DoubleConnectedNode) -> DoubleConnectedNode:
-    """Разворачивает двусвязный список на месте."""
-    if not node:
-        return node
+def solution(
+    head: "DoubleConnectedNode | None",
+) -> "DoubleConnectedNode | None":
+    if not head:
+        return None
 
-    current = node
-    previous = None
+    current: DoubleConnectedNode | None = head
+    previous: DoubleConnectedNode | None = None
 
     while current is not None:
-        next_node = current.next
-
+        next_node: DoubleConnectedNode | None = current.next
         current.next = previous
         current.prev = next_node
-
         previous = current
         current = next_node
 
