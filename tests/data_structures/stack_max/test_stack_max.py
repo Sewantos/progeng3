@@ -1,4 +1,24 @@
+import pytest
+
 from tasks.data_structures.stack_max.solution import StackMax
+
+
+@pytest.mark.parametrize(
+    "initial_ops, expected_first_max",
+    [
+        ([], "None"),
+        ([("push", 5)], 5),
+        ([("push", 5), ("push", 1)], 5),
+        ([("push", 5), ("push", 1), ("push", 10)], 10),
+    ],
+)  # type: ignore[misc]
+def test_push_and_get_max_parametrized(
+    initial_ops: list[tuple[str, int]], expected_first_max: int | str
+) -> None:
+    stack = StackMax()
+    for _op, value in initial_ops:
+        stack.push(value)
+    assert stack.get_max() == expected_first_max
 
 
 def test_empty_stack_behavior() -> None:
@@ -6,18 +26,6 @@ def test_empty_stack_behavior() -> None:
     assert stack.get_max() == "None"
     assert stack.pop() == "error"
     assert stack.get_max() == "None"
-
-
-def test_push_and_get_max() -> None:
-    stack = StackMax()
-    stack.push(5)
-    assert stack.get_max() == 5
-
-    stack.push(1)
-    assert stack.get_max() == 5
-
-    stack.push(10)
-    assert stack.get_max() == 10
 
 
 def test_pop_and_max_update() -> None:

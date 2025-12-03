@@ -1,11 +1,14 @@
+import pytest
+
 from tasks.data_structures.double_connected_node.solution import (
     DoubleConnectedNode,
     solution,
 )
 
 
-def test_single_node() -> None:
-    node = DoubleConnectedNode(1)
+@pytest.mark.parametrize("value", [1, "only", 42])  # type: ignore[misc]
+def test_single_node_param(value: object) -> None:
+    node = DoubleConnectedNode(value)
     new_head = solution(node)
 
     assert new_head is node
