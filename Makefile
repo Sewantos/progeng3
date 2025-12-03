@@ -15,3 +15,6 @@ lint-all:
 
 test:
 	poetry run pytest ./tests
+
+test_full:
+	poetry run pytest -v
