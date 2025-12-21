@@ -1,45 +1,61 @@
 [tool.poetry]
 name = "software_engineering_algo_tasks"
-version = "0.0.0"
-description = "software_engineering_algo_tasks"
+version = "0.1.0"
+description = ""
 authors = []
 readme = "README.md"
 package-mode = false
 
 [tool.poetry.dependencies]
-python = ">=3.9,<=3.12"
+python = "^3.11"
 
-[tool.poetry.dev-dependencies]
-pytest = ">=7.0"
-pre-commit = ">=3.0"
-ruff = ">=0.5"
-black = ">=24.0"
-isort = ">=5.12"
-mypy = ">=1.6"
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0"
+ruff = "^0.6"
+black = "^24.8"
+mypy = "^1.11"
+pytest-xdist = "^3.8.0"
+pytest-mypy = "^1.0.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 79
+target-version = "py311"
+
+[tool.ruff.lint]
+extend-select = ["E", "F", "I", "B", "UP", "C4", "RUF", "C4"]
+extend-ignore = ["E501"]
+[tool.ruff.format]
+quote-style = "double"
 
 [tool.black]
-line-length = 100
-target-version = ["py312", "py311", "py310", "py39"]
+line-length = 79
+target-version = ["py311"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["tasks"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
 
 [tool.isort]
 profile = "black"
-line_length = 100
-src_paths = ["tasks", "tests"]
+line_length = 79
+multi_line_output = 3
+include_trailing_comma = true
+force_single_line = false
+combine_as_imports = true
 
-[tool.ruff]
-line-length = 100
-extend-select = ["E", "F", "I", "B", "UP"]
-ignore = []
-
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
-
-
-[tool.mypy]
+[[tool.mypy.overrides]]
+module = "pytest"
 ignore_missing_imports = true
-disallow_untyped_defs = true
-no_implicit_optional = true
-strict_optional = true
-pretty = true
-explicit_package_bases = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
